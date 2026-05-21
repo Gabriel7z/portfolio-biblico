@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Portfólio Completo | Profecias + Evidências + Igreja + Pregadores + Parábolas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #fefaf5;
+            color: #2c2418;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+        /* BORDAS QUADRADAS */
+        .hero, .tab-btn, .filter-btn, .card, .card-header, .fulfillment, .theo-card, .stats, .sub-tab-btn, .card-footer, footer, .photo-placeholder {
+            border-radius: 0 !important;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            width: 100%;
+            overflow-x: hidden;
+        }
+        .hero {
+            background: linear-gradient(135deg, #2c3e2f 0%, #1e3a2f 100%);
+            color: white;
+            padding: 40px 0 50px;
+            text-align: center;
+            margin-bottom: 32px;
+        }
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            word-break: break-word;
+        }
+        .hero h1 i { color: #f5c542; margin-right: 12px; }
+        .hero p { font-size: 1.1rem; max-width: 800px; margin: 8px auto 0; opacity: 0.9; word-break: break-word; }
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin: 24px 0 32px;
+            flex-wrap: wrap;
+        }
+        .tab-btn {
+            background: white;
+            border: 1px solid #e0cfbc;
+            padding: 10px 22px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: #3e2c1c;
+            white-space: nowrap;
+        }
+        @media (max-width: 580px) {
+            .tab-btn { white-space: normal; padding: 8px 16px; font-size: 0.8rem; }
+            .hero h1 { font-size: 1.8rem; }
+        }
+        .tab-btn i { margin-right: 8px; }
+        .tab-btn.active {
+            background: #2c3e2f;
+            border-color: #2c3e2f;
+            color: white;
+        }
+        .tab-content { display: none; }
+        .tab-content.active-tab { display: block; }
+
+        /* sub-tabs internos */
+        .sub-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin: 20px 0 28px;
+            flex-wrap: wrap;
+            border-bottom: 1px solid #eedfcb;
+            padding-bottom: 12px;
+        }
+        .sub-tab-btn {
+            background: transparent;
+            border: none;
+            padding: 8px 24px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: #5c4b34;
+            white-space: nowrap;
+        }
+        @media (max-width: 580px) {
+            .sub-tab-btn { white-space: normal; padding: 6px 16px; font-size: 0.8rem; }
+        }
+        .sub-tab-btn i { margin-right: 8px; }
+        .sub-tab-btn.active {
+            background: #e6d5c0;
+            color: #2c3e2f;
+        }
+        .sub-content { display: none; }
+        .sub-content.active-sub { display: block; }
+
+        .filter-bar {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 32px;
+        }
+        .filter-btn {
+            background: white;
+            border: 1px solid #e0cfbc;
+            padding: 6px 16px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        @media (max-width: 500px) {
+            .filter-btn { white-space: normal; padding: 5px 12px; font-size: 0.7rem; }
+        }
+        .filter-btn.active, .filter-btn:hover {
+            background: #2c3e2f;
+            border-color: #2c3e2f;
+            color: white;
+        }
+        .stats {
+            background: #fff9f2;
+            padding: 6px 18px;
+            display: inline-flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+            border: 1px solid #f0e2d4;
+            flex-wrap: wrap;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 28px;
+            margin-bottom: 60px;
+        }
+        @media (max-width: 680px) {
+            .grid { grid-template-columns: 1fr; gap: 20px; }
+        }
+        .card {
+            background: white;
+            box-shadow: 0 12px 28px rgba(0,0,0,0.05);
+            overflow: hidden;
+            transition: transform 0.2s;
+            border: 1px solid #f0e2d4;
+            display: flex;
+            flex-direction: column;
+            word-break: break-word;
+            overflow-wrap: break-word;
+            min-width: 0;
+            max-width: 100%;
+        }
+        .card:hover { transform: translateY(-5px); }
+        .card-header {
+            background: #faf3ea;
+            padding: 18px 20px;
+            border-bottom: 1px solid #eedfcb;
+            word-break: break-word;
+        }
+        .category-tag {
+            display: inline-block;
+            background: #e6d5c0;
+            padding: 4px 12px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            word-break: keep-all;
+        }
+        .ref-line {
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: #8b5a2b;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 8px;
+            flex-wrap: wrap;
+            word-break: break-word;
+        }
+        .prophecy-text { 
+            font-size: 1rem; 
+            font-weight: 600; 
+            margin: 8px 0;
+            line-height: 1.4;
+            word-break: break-word;
+        }
+        .fulfillment {
+            background: #f4f0eb;
+            padding: 16px;
+            margin-top: 12px;
+            word-break: break-word;
+        }
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 28px;
+            margin-bottom: 48px;
+        }
+        @media (max-width: 780px) {
+            .comparison-grid { grid-template-columns: 1fr; }
+        }
+        .theo-card {
+            background: white;
+            padding: 24px;
+            border: 1px solid #e0cfbc;
+            word-break: break-word;
+            overflow-wrap: break-word;
+        }
+        .theo-card h3 { font-size: 1.8rem; margin-bottom: 16px; text-align: center; word-break: break-word; }
+        .theo-card ul { list-style: none; padding-left: 0; }
+        .theo-card li { margin-bottom: 12px; padding-left: 24px; position: relative; word-break: break-word; }
+        .theo-card li i { position: absolute; left: 0; top: 3px; color: #b97f44; }
+        
+        /* Estilo para pregadores */
+        .preacher-card .photo-placeholder {
+            background: #d9cbb8;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #5c4b34;
+            font-size: 0.9rem;
+            text-align: center;
+            border-bottom: 1px solid #eedfcb;
+        }
+        .preacher-card .card-body {
+            padding: 18px 20px;
+        }
+        .preacher-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+            color: #2c3e2f;
+        }
+        .preacher-card .bio {
+            margin: 12px 0;
+            line-height: 1.5;
+        }
+        .preacher-card .contributions {
+            margin-top: 12px;
+            font-style: italic;
+            color: #7a5a3a;
+        }
+        /* Estilo para parábolas */
+        .parable-card .difficulty-badge {
+            display: inline-block;
+            padding: 3px 10px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 12px;
+        }
+        .parable-card .explanation {
+            margin-top: 12px;
+            border-top: 1px dashed #eedfcb;
+            padding-top: 12px;
+        }
+        footer {
+            text-align: center;
+            padding: 30px;
+            border-top: 1px solid #eedfcb;
+            margin-top: 20px;
+            color: #7f6242;
+            font-size: 0.85rem;
+        }
+        .footer-credit {
+            margin-top: 8px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        @media (max-width: 480px) {
+            .container { padding: 0 16px; }
+            .card-header, .card-body { padding: 14px 16px; }
+            .theo-card { padding: 18px; }
+            .stats { font-size: 0.8rem; gap: 8px; }
+            .preacher-card .photo-placeholder { height: 160px; }
+        }
+    </style>
+</head>
+<body>
+<div class="hero">
+    <div class="container">
+        <h1><i class="fas fa-scroll"></i> Portfólio da Fé Cristã</h1>
+        <p>Profecias · Evidências · Palavras de Jesus · Teologia · Avivamentos · História · Pregadores · Parábolas</p>
+    </div>
+</div>
+
+<div class="container">
+    <div class="tabs">
+        <button class="tab-btn active" data-tab="messiaticas"><i class="fas fa-star-of-david"></i> Messiânicas</button>
+        <button class="tab-btn" data-tab="evidencias"><i class="fas fa-landmark"></i> Evidências</button>
+        <button class="tab-btn" data-tab="jesus"><i class="fas fa-church"></i> Profecias de Jesus</button>
+        <button class="tab-btn" data-tab="igreja"><i class="fas fa-praying-hands"></i> Igreja</button>
+        <button class="tab-btn" data-tab="pregadores"><i class="fas fa-chalkboard-user"></i> Pregadores</button>
+        <button class="tab-btn" data-tab="parabolas"><i class="fas fa-seedling"></i> Parábolas</button>
+    </div>
+
+    <!-- ABA 1: PROFECIAS MESSIÂNICAS -->
+    <div id="messiaticasTab" class="tab-content active-tab">
+        <div class="stats"><i class="fas fa-chart-line"></i> 24 profecias do AT cumpridas em Jesus</div>
+        <div class="filter-bar" id="filterMessiaticasBar">
+            <button class="filter-btn active" data-filter="all">Todas</button>
+            <button class="filter-btn" data-filter="linhagem">Linhagem</button>
+            <button class="filter-btn" data-filter="vida">Vida & Ministério</button>
+            <button class="filter-btn" data-filter="sofrimento">Sofrimento & Morte</button>
+            <button class="filter-btn" data-filter="ressurreicao">Ressurreição</button>
+        </div>
+        <div id="messiaticasGrid" class="grid"></div>
+    </div>
+
+    <!-- ABA 2: EVIDÊNCIAS -->
+    <div id="evidenciasTab" class="tab-content">
+        <div class="stats"><i class="fas fa-hard-hat"></i> 8 evidências históricas e científicas</div>
+        <div id="evidenciasGrid" class="grid"></div>
+    </div>
+
+    <!-- ABA 3: PROFECIAS DE JESUS -->
+    <div id="jesusTab" class="tab-content">
+        <div class="stats"><i class="fas fa-hourglass-half"></i> <span id="totalJesusProfecias">0</span> profecias de Jesus</div>
+        <div class="filter-bar" id="filterJesusBar">
+            <button class="filter-btn active" data-filter="all">Todas</button>
+            <button class="filter-btn" data-filter="jerusalem">Destruição de Jerusalém</button>
+            <button class="filter-btn" data-filter="escatologia">Fim dos Tempos</button>
+            <button class="filter-btn" data-filter="paixao">Paixão & Morte</button>
+            <button class="filter-btn" data-filter="igreja">Igreja & Espírito</button>
+        </div>
+        <div id="jesusGrid" class="grid"></div>
+    </div>
+
+    <!-- ABA 4: IGREJA (Teologia, Avivamentos, Brasil) -->
+    <div id="igrejaTab" class="tab-content">
+        <div class="sub-tabs">
+            <button class="sub-tab-btn active" data-sub="teologia"><i class="fas fa-balance-scale"></i> Teologia (Arm x Calv)</button>
+            <button class="sub-tab-btn" data-sub="avivamentos"><i class="fas fa-fire"></i> Avivamentos Mundiais</button>
+            <button class="sub-tab-btn" data-sub="brasil"><i class="fas fa-flag-checkered"></i> História no Brasil</button>
+        </div>
+
+        <div id="subTeologia" class="sub-content active-sub">
+            <h2 style="margin: 20px 0 16px;"><i class="fas fa-balance-scale"></i> Paralelo Teológico: Arminianismo x Calvinismo</h2>
+            <div class="comparison-grid">
+                <div class="theo-card"><h3><i class="fas fa-leaf"></i> Arminianismo</h3>
+                    <ul><li><i class="fas fa-check-circle"></i> <strong>Livre-arbítrio:</strong> O homem pode aceitar ou rejeitar a graça.</li>
+                    <li><i class="fas fa-check-circle"></i> <strong>Expiação ilimitada:</strong> Cristo morreu por todos, mas só é eficaz para quem crê.</li>
+                    <li><i class="fas fa-check-circle"></i> <strong>Graça resistível:</strong> O homem pode resistir ao chamado de Deus.</li>
+                    <li><i class="fas fa-check-circle"></i> <strong>Eleição condicional:</strong> Deus elege aqueles que prevê que crerão.</li>
+                    <li><i class="fas fa-check-circle"></i> <strong>Possibilidade de apostasia:</strong> Um crente pode perder a salvação.</li></ul>
+                    <p style="margin-top:16px;"><strong>Principais nomes:</strong> Jacó Armínio, John Wesley, Metodistas.</p>
+                </div>
+                <div class="theo-card"><h3><i class="fas fa-calvin"></i> Calvinismo (TULIP)</h3>
+                    <ul><li><i class="fas fa-check-circle"></i> <strong>Depravação total:</strong> O homem sem Deus é incapaz de buscar a salvação.</li>
+                    <li><i class="fas fa-check-circle"></i> <strong>Eleição incondicional:</strong> Deus escolhe os salvos por sua soberania.</li>
+                    <li><i class="fas fa-check-circle"></i> <strong>Expiação limitada:</strong> Cristo morreu apenas pelos eleitos.</li>
+                    <li><i class="fas fa-check-circle"></i> <strong>Graça irresistível:</strong> Quem é eleito não resiste ao chamado eficaz.</li>
+                    <li><i class="fas fa-check-circle"></i> <strong>Perseverança dos santos:</strong> Uma vez salvo, sempre salvo.</li></ul>
+                    <p style="margin-top:16px;"><strong>Principais nomes:</strong> João Calvino, Puritanos, Reformados.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="subAvivamentos" class="sub-content">
+            <h2 style="margin:20px 0 16px;"><i class="fas fa-fire"></i> Maiores Avivamentos</h2>
+            <div id="avivamentosGrid" class="grid"></div>
+        </div>
+
+        <div id="subBrasil" class="sub-content">
+            <h2 style="margin:20px 0 16px;"><i class="fas fa-flag-checkered"></i> História da Igreja no Brasil</h2>
+            <div id="brasilGrid" class="grid"></div>
+        </div>
+    </div>
+
+    <!-- ABA 5: GRANDES PREGADORES -->
+    <div id="pregadoresTab" class="tab-content">
+        <div class="stats"><i class="fas fa-microphone-alt"></i> 8 pregadores que marcaram gerações</div>
+        <div id="pregadoresGrid" class="grid"></div>
+    </div>
+
+    <!-- ABA 6: PARÁBOLAS DE JESUS (5 grupos) -->
+    <div id="parabolasTab" class="tab-content">
+        <div class="sub-tabs">
+            <button class="sub-tab-btn active" data-sub="simples"><i class="fas fa-seedling"></i> Simples</button>
+            <button class="sub-tab-btn" data-sub="faceis"><i class="fas fa-smile"></i> Fáceis</button>
+            <button class="sub-tab-btn" data-sub="intermediarias"><i class="fas fa-chart-line"></i> Intermediárias</button>
+            <button class="sub-tab-btn" data-sub="desafiadoras"><i class="fas fa-brain"></i> Desafiadoras</button>
+            <button class="sub-tab-btn" data-sub="profundas"><i class="fas fa-mountain"></i> Profundas</button>
+        </div>
+
+        <div id="subSimples" class="sub-content active-sub"><div id="gridSimples" class="grid"></div></div>
+        <div id="subFaceis" class="sub-content"><div id="gridFaceis" class="grid"></div></div>
+        <div id="subIntermediarias" class="sub-content"><div id="gridIntermediarias" class="grid"></div></div>
+        <div id="subDesafiadoras" class="sub-content"><div id="gridDesafiadoras" class="grid"></div></div>
+        <div id="subProfundas" class="sub-content"><div id="gridProfundas" class="grid"></div></div>
+    </div>
+</div>
+
+<footer>
+    <i class="fas fa-book-open"></i> Portfólio completo: profecias, evidências, teologia, avivamentos, história, pregadores e parábolas de Jesus.
+    <div class="footer-credit"><i class="fas fa-code"></i> Criado por Gabriel Ferreira</div>
+</footer>
+
+<script>
+    // ===================== PROFECIAS MESSIÂNICAS (24) =====================
+    const messiaticas = [
+        { id:1, cat:"linhagem", ot:"Gênesis 3:15", desc:"A semente da mulher ferirá a cabeça da serpente", nt:"Gálatas 4:4; 1Jo 3:8", cumprimento:"Jesus, nascido de Maria, destruiu as obras do diabo." },
+        { id:2, cat:"linhagem", ot:"Gênesis 12:3; 22:18", desc:"Em Abraão serão benditas todas as famílias", nt:"Mateus 1:1; Gálatas 3:16", cumprimento:"Descendente de Abraão que abençoa as nações." },
+        { id:3, cat:"linhagem", ot:"Gênesis 17:19; 21:12", desc:"Descendente de Isaque", nt:"Lucas 3:23-34", cumprimento:"Genealogia de Jesus até Isaque." },
+        { id:4, cat:"linhagem", ot:"Gênesis 28:14; Nm 24:17", desc:"Descendente de Jacó", nt:"Mateus 1:2; Ap 22:16", cumprimento:"Jesus é a raiz de Davi e Jacó." },
+        { id:5, cat:"linhagem", ot:"Gênesis 49:10", desc:"Cetro de Judá", nt:"Mateus 1:2-3; Ap 5:5", cumprimento:"Leão da tribo de Judá." },
+        { id:6, cat:"linhagem", ot:"2Sm 7:12-13; Jr 23:5", desc:"Herdeiro do trono de Davi", nt:"Mt 1:1; Lc 1:32-33", cumprimento:"Filho de Davi, reino eterno." },
+        { id:7, cat:"linhagem", ot:"Isaías 7:14", desc:"Nasceria de uma virgem", nt:"Mateus 1:18-25", cumprimento:"Concebido pelo Espírito, nascido de Maria." },
+        { id:8, cat:"linhagem", ot:"Miquéias 5:2", desc:"Nasceria em Belém", nt:"Mateus 2:1; Lucas 2:4-7", cumprimento:"Jesus nasceu em Belém da Judeia." },
+        { id:9, cat:"vida", ot:"Isaías 40:3; Malaquias 3:1", desc:"Precedido por mensageiro", nt:"Mateus 3:1-3; João 1:23", cumprimento:"João Batista preparou o caminho." },
+        { id:10, cat:"vida", ot:"Isaías 9:1-2", desc:"Ministério na Galileia", nt:"Mateus 4:13-16", cumprimento:"Início do ministério em Cafarnaum." },
+        { id:11, cat:"vida", ot:"Isaías 35:5-6", desc:"Curaria cegos, surdos, coxos", nt:"Mateus 11:4-5", cumprimento:"Jesus realizou curas milagrosas." },
+        { id:12, cat:"vida", ot:"Zacarias 9:9", desc:"Entrada triunfal em jumento", nt:"Mateus 21:1-11", cumprimento:"Domingo de Ramos." },
+        { id:13, cat:"vida", ot:"Dt 18:15-19", desc:"Profeta como Moisés", nt:"Atos 3:18-25", cumprimento:"Jesus é o profeta prometido." },
+        { id:14, cat:"vida", ot:"Salmo 110:4", desc:"Sacerdote à ordem de Melquisedeque", nt:"Hebreus 5:5-6", cumprimento:"Sumo sacerdote eterno." },
+        { id:15, cat:"vida", ot:"Salmo 2:6; Is 33:22", desc:"Rei que julga com justiça", nt:"João 18:33-37; Atos 10:42", cumprimento:"Jesus é Rei dos reis." },
+        { id:16, cat:"sofrimento", ot:"Sl 41:9; Zc 11:12-13", desc:"Traído por 30 moedas", nt:"Mateus 26:14-15", cumprimento:"Judas traiu por 30 moedas." },
+        { id:17, cat:"sofrimento", ot:"Isaías 53:7", desc:"Silencioso diante dos acusadores", nt:"Mateus 26:59-63", cumprimento:"Não respondeu ao Sinédrio." },
+        { id:18, cat:"sofrimento", ot:"Isaías 53:4-6,12", desc:"Sofrimento vicário", nt:"Romanos 4:25; 1Pe 3:18", cumprimento:"Morreu pelos nossos pecados." },
+        { id:19, cat:"sofrimento", ot:"Sl 22:16; Êx 12:46", desc:"Traspassado, nenhum osso quebrado", nt:"João 19:31-37", cumprimento:"Na cruz foi traspassado; ossos intactos." },
+        { id:20, cat:"sofrimento", ot:"Isaías 53:12", desc:"Crucificado com malfeitores", nt:"Lucas 23:32-34", cumprimento:"Entre dois criminosos; orou por eles." },
+        { id:21, cat:"sofrimento", ot:"Isaías 53:9", desc:"Sepultado com o rico", nt:"Mateus 27:57-60", cumprimento:"José de Arimateia deu seu túmulo." },
+        { id:22, cat:"ressurreicao", ot:"Salmo 16:10", desc:"Não veria corrupção", nt:"Atos 2:25-31", cumprimento:"Ressuscitou ao terceiro dia." },
+        { id:23, cat:"ressurreicao", ot:"Salmo 110:1", desc:"Exaltado à direita de Deus", nt:"Atos 2:33-36", cumprimento:"Assentou-se à direita do Pai." },
+        { id:24, cat:"ressurreicao", ot:"Joel 2:28-29", desc:"Derramaria o Espírito Santo", nt:"Atos 2:1-4,16-18", cumprimento:"Pentecostes." }
+    ];
+
+    const evidencias = [
+        { titulo:"Cilindro de Ciro", desc:"Confirma decreto de Ciro (539 a.C.) e o retorno dos judeus (Is 44:28).", link:"https://www.britishmuseum.org/collection/object/W_1880-0617-1941" },
+        { titulo:"Manuscritos do Mar Morto", desc:"Rolo de Isaías (125 a.C.) prova que Is 53 é anterior a Jesus.", link:"https://www.imj.org.il/en/collections/200035" },
+        { titulo:"Papiro P52", desc:"Fragmento de João (125-160 d.C.) confirma autoria no século I.", link:"https://en.wikipedia.org/wiki/Papyrus_52" },
+        { titulo:"Tácito (Anais)", desc:"Historiador romano confirma execução de Jesus por Pilatos.", link:"https://en.wikipedia.org/wiki/Tacitus_on_Christ" },
+        { titulo:"Flávio Josefo", desc:"Menciona Jesus e Tiago, seu irmão, confirmando historicidade.", link:"https://en.wikipedia.org/wiki/Josephus_on_Jesus" },
+        { titulo:"Suetônio", desc:"Relata expulsão de judeus por causa de 'Cristo'.", link:"https://en.wikipedia.org/wiki/Suetonius_on_Christians" },
+        { titulo:"Pedra Moabita", desc:"Estela do séc. IX a.C. confirma relatos bíblicos sobre Moabe.", link:"https://en.wikipedia.org/wiki/Mesha_Stele" },
+        { titulo:"Datificação científica", desc:"Paleografia e Carbono-14 atestam a antiguidade dos manuscritos bíblicos.", link:"https://en.wikipedia.org/wiki/Dating_the_Bible" }
+    ];
+
+    const jesusProfecias = [
+        { id:101, cat:"jerusalem", texto:"Não ficará pedra sobre pedra", ref:"Mateus 24:2", status:"Cumprido", detalhe:"Em 70 d.C., Tito destruiu Jerusalém." },
+        { id:102, cat:"jerusalem", texto:"Quando virdes Jerusalém cercada", ref:"Lucas 21:20", status:"Cumprido", detalhe:"Cerco romano descrito por Josefo." },
+        { id:103, cat:"jerusalem", texto:"Serão levados cativos", ref:"Lucas 21:24", status:"Cumprido", detalhe:"Judeus espalhados pelo Império." },
+        { id:104, cat:"jerusalem", texto:"Não passará esta geração", ref:"Mateus 24:34", status:"Cumprido", detalhe:"Cumpriu-se em ~40 anos." },
+        { id:105, cat:"jerusalem", texto:"Fujam para os montes", ref:"Mateus 24:16", status:"Cumprido", detalhe:"Cristãos fugiram para Pella." },
+        { id:106, cat:"escatologia", texto:"Sinais no sol e lua", ref:"Lucas 21:25", status:"Futuro", detalhe:"Antes da volta de Cristo." },
+        { id:107, cat:"escatologia", texto:"Virá numa nuvem", ref:"Lucas 21:27", status:"Futuro", detalhe:"Segunda vinda." },
+        { id:108, cat:"escatologia", texto:"Como nunca houve", ref:"Mateus 24:21", status:"Futuro", detalhe:"Período de sofrimento." },
+        { id:109, cat:"escatologia", texto:"Pregado em todo o mundo", ref:"Mateus 24:14", status:"Em cumprimento", detalhe:"Missão global." },
+        { id:110, cat:"paixao", texto:"Um de vós me trairá", ref:"Mateus 26:21", status:"Cumprido", detalhe:"Judas Iscariotes." },
+        { id:111, cat:"paixao", texto:"Três vezes me negarás", ref:"Mateus 26:34", status:"Cumprido", detalhe:"Pedro negou Jesus." },
+        { id:112, cat:"paixao", texto:"Morto e ao terceiro dia ressuscitará", ref:"Lucas 9:22", status:"Cumprido", detalhe:"Ressurreição confirmada." },
+        { id:113, cat:"igreja", texto:"Vos matarão", ref:"Mateus 24:9", status:"Em cumprimento", detalhe:"Mártires ao longo da história." },
+        { id:114, cat:"igreja", texto:"Recebereis poder", ref:"Atos 1:8", status:"Cumprido", detalhe:"Pentecostes." },
+        { id:115, cat:"escatologia", texto:"Haverá fomes e terremotos", ref:"Mateus 24:7", status:"Em cumprimento", detalhe:"Sinais atuais." }
+    ];
+
+    const avivamentos = [
+        { nome:"Grande Despertamento (1730-1740)", local:"EUA / Inglaterra", lider:"Jonathan Edwards, George Whitefield", desc:"Milhares de conversões, renovação espiritual." },
+        { nome:"Avivamento de 1859", local:"Irlanda, Escócia, País de Gales", lider:"Vários leigos", desc:"Grande movimento de oração." },
+        { nome:"Avivamento de Gales (1904-1905)", local:"País de Gales", lider:"Evan Roberts", desc:"100 mil convertidos." },
+        { nome:"Azusa Street (1906-1915)", local:"Los Angeles", lider:"William J. Seymour", desc:"Nascimento do pentecostalismo." },
+        { nome:"Billy Graham (1949-2005)", local:"Mundial", lider:"Billy Graham", desc:"Cruzadas evangelísticas." },
+        { nome:"Toronto (1994)", local:"Canadá", lider:"John Arnott", desc:"Renovação carismática." }
+    ];
+
+    const historiaBrasil = [
+        { marco:"Missão Francesa (1555)", desc:"Huguenotes tentam colonizar o Rio de Janeiro." },
+        { marco:"Chegada dos protestantes (séc. XIX)", desc:"Primeira capela protestante (1824) e imigração alemã." },
+        { marco:"Missões de Robert Kalley (1855)", desc:"Fundação da Igreja Congregacional." },
+        { marco:"Chegada dos batistas (1882)", desc:"Zacarias Taylor organiza a primeira igreja batista." },
+        { marco:"Origem da Assembleia de Deus (1911)", desc:"Gunnar Vingren e Daniel Berg fundam em Belém do Pará." },
+        { marco:"Expansão da Assembleia de Deus", desc:"Crescimento na Amazônia e em todo o país com a Harpa Cristã." },
+        { marco:"Estruturação (1940-1980)", desc:"CGADB, rádios e TV. Maior denominação evangélica do Brasil." },
+        { marco:"Assembleia de Deus hoje", desc:"Mais de 12 milhões de membros, forte presença social e política." }
+    ];
+
+    const pregadores = [
+        { nome: "John Wesley", fotoPlaceholder: "Foto: John Wesley", nasc: "1703–1791", bio: "Fundador do Metodismo, pregou mais de 40.000 sermões.", contrib: "Sermões e santificação." },
+        { nome: "Charles Spurgeon", fotoPlaceholder: "Foto: Spurgeon", nasc: "1834–1892", bio: "Príncipe dos Pregadores, pastor em Londres.", contrib: "3.600 sermões publicados." },
+        { nome: "Isaac Newton", fotoPlaceholder: "Foto: Newton", nasc: "1643–1727", bio: "Cientista e teólogo, estudou profecias.", contrib: "Obras sobre Daniel e Apocalipse." },
+        { nome: "George Whitefield", fotoPlaceholder: "Foto: Whitefield", nasc: "1714–1770", bio: "Pregador do Grande Despertamento.", contrib: "Sermões ao ar livre." },
+        { nome: "Jonathan Edwards", fotoPlaceholder: "Foto: Edwards", nasc: "1703–1758", bio: "Teólogo e filósofo americano.", contrib: "'Sinners in the Hands of an Angry God'." },
+        { nome: "D.L. Moody", fotoPlaceholder: "Foto: Moody", nasc: "1837–1899", bio: "Evangelista americano, fundou o Instituto Moody.", contrib: "Cruzadas evangelísticas." },
+        { nome: "Billy Graham", fotoPlaceholder: "Foto: Graham", nasc: "1918–2018", bio: "Evangelista do século XX.", contrib: "Pregou para 200 milhões." },
+        { nome: "Charles Finney", fotoPlaceholder: "Foto: Finney", nasc: "1792–1875", bio: "Avivalista do Segundo Grande Despertamento.", contrib: "'Reavivamentos de Religião'." }
+    ];
+
+    // Parábolas (5 grupos)
+    const parabolas = {
+        simples: [
+            { titulo: "O Semeador", ref: "Mateus 13:3-9,18-23", narrativa: "Um semeador lança sementes em diferentes solos: caminho, pedras, espinhos e terra boa.", significado: "Os corações respondem de forma diferente à Palavra de Deus. Só a terra boa (coração receptivo) frutifica." },
+            { titulo: "O Sal da Terra", ref: "Mateus 5:13", narrativa: "Jesus compara os discípulos ao sal, que dá sabor e preserva.", significado: "Os cristãos devem influenciar o mundo com a verdade e o amor de Deus." },
+            { titulo: "A Luz do Mundo", ref: "Mateus 5:14-16", narrativa: "Uma cidade no monte não pode esconder-se; acende-se uma luz para iluminar a casa.", significado: "Devemos brilhar com boas obras para que outros glorifiquem a Deus." }
+        ],
+        faceis: [
+            { titulo: "O Bom Samaritano", ref: "Lucas 10:25-37", narrativa: "Um samaritano ajuda um judeu ferido à beira do caminho, enquanto sacerdotes e levitas o ignoram.", significado: "O amor ao próximo transcende barreiras religiosas e étnicas; misericórdia é essencial." },
+            { titulo: "O Filho Pródigo", ref: "Lucas 15:11-32", narrativa: "Um filho pede herança, esbanja tudo, volta arrependido e o pai o recebe com festa.", significado: "O amor incondicional de Deus e a alegria do arrependimento." },
+            { titulo: "A Ovelha Perdida", ref: "Mateus 18:12-14; Lucas 15:3-7", narrativa: "Um pastor deixa 99 ovelhas para buscar uma perdida.", significado: "Deus busca cada pecador com amor e alegra-se com o arrependimento." }
+        ],
+        intermediarias: [
+            { titulo: "O Grão de Mostarda", ref: "Mateus 13:31-32", narrativa: "A menor semente torna-se a maior das hortaliças.", significado: "O Reino de Deus começa pequeno, mas cresce e impacta o mundo." },
+            { titulo: "O Tesouro Escondido", ref: "Mateus 13:44", narrativa: "Um homem vende tudo para comprar um campo onde encontrou um tesouro.", significado: "O Reino de Deus tem valor supremo, que vale qualquer sacrifício." },
+            { titulo: "A Pérola de Grande Valor", ref: "Mateus 13:45-46", narrativa: "Um mercador vende tudo para adquirir uma pérola preciosa.", significado: "Buscar o Reino de Deus acima de todas as coisas." },
+            { titulo: "A Rede", ref: "Mateus 13:47-50", narrativa: "Uma rede pesca peixes bons e maus; no fim, separam-se.", significado: "No juízo final, Deus separará os justos dos maus." }
+        ],
+        desafiadoras: [
+            { titulo: "O Rico e Lázaro", ref: "Lucas 16:19-31", narrativa: "Um rico que viveu em ostentação e um mendigo Lázaro morrem; o rico vai para o tormento, Lázaro para o paraíso.", significado: "A riqueza sem justiça e fé leva à condenação; as Escrituras são suficientes para advertir." },
+            { titulo: "O Juiz Iníquo", ref: "Lucas 18:1-8", narrativa: "Uma viúva insiste com um juiz injusto até que ele lhe faz justiça.", significado: "Devemos orar sempre sem desanimar; Deus é justo e responderá aos seus escolhidos." },
+            { titulo: "O Fariseu e o Publicano", ref: "Lucas 18:9-14", narrativa: "Fariseu orgulhoso agradece a Deus por não ser como os outros; publicano humilde pede misericórdia.", significado: "A humildade diante de Deus é justificação; o orgulho é condenado." }
+        ],
+        profundas: [
+            { titulo: "Os Trabalhadores na Vinha", ref: "Mateus 20:1-16", narrativa: "Donos contratam trabalhadores em diferentes horas do dia e pagam a mesma quantia.", significado: "A graça de Deus é soberana; não é por merecimento humano. Os últimos serão primeiros." },
+            { titulo: "O Trigo e o Joio", ref: "Mateus 13:24-30,36-43", narrativa: "Um inimigo semeia joio no campo de trigo; ambos crescem até a colheita.", significado: "Na igreja e no mundo, bem e mal coexistem até o juízo final." },
+            { titulo: "As Dez Virgens", ref: "Mateus 25:1-13", narrativa: "Cinco virgens prudentes levam azeite para as lâmpadas; as insensatas não levam e ficam de fora.", significado: "Preparação espiritual constante para a volta de Cristo; não se pode viver da fé alheia." },
+            { titulo: "Os Talentos", ref: "Mateus 25:14-30", narrativa: "Um senhor confia talentos (dinheiro) a servos; dois investem e ganham, um enterra e perde.", significado: "Devemos usar os dons de Deus para servir, sob risco de perda." }
+        ]
+    };
+
+    // Renderização
+    function renderMessiaticas(filter) {
+        const f = filter === 'all' ? messiaticas : messiaticas.filter(p => p.cat === filter);
+        document.getElementById('messiaticasGrid').innerHTML = f.map(p => `
+            <div class="card"><div class="card-header"><div class="category-tag">${p.cat}</div>
+            <div class="ref-line">${p.ot}</div><div class="prophecy-text">“${p.desc}”</div></div>
+            <div class="card-body"><div class="fulfillment"><div class="fulfillment-title">Cumprimento (NT)</div>
+            <div class="ref-line">${p.nt}</div><div>${p.cumprimento}</div></div></div></div>
+        `).join('');
+    }
+    function renderEvidencias() {
+        document.getElementById('evidenciasGrid').innerHTML = evidencias.map(e => `
+            <div class="card"><div class="card-header"><div class="category-tag">Evidência</div>
+            <div class="ref-line"><strong>${e.titulo}</strong></div></div>
+            <div class="card-body"><p>${e.desc}</p><a href="${e.link}" target="_blank" style="color:#b97f44;">Saiba mais →</a></div></div>
+        `).join('');
+    }
+    function renderJesusProfecias(filter) {
+        const f = filter === 'all' ? jesusProfecias : jesusProfecias.filter(p => p.cat === filter);
+        document.getElementById('totalJesusProfecias').innerText = f.length;
+        document.getElementById('jesusGrid').innerHTML = f.map(p => `
+            <div class="card"><div class="card-header"><div class="category-tag">${p.cat}</div>
+            <div class="ref-line">${p.ref}</div><div class="prophecy-text">“${p.texto}”</div></div>
+            <div class="card-body"><div class="fulfillment"><div class="fulfillment-title">Status: ${p.status}</div>
+            <div>${p.detalhe}</div></div></div></div>
+        `).join('');
+    }
+    function renderAvivamentos() {
+        document.getElementById('avivamentosGrid').innerHTML = avivamentos.map(a => `
+            <div class="card"><div class="card-header"><div class="category-tag"><i class="fas fa-fire"></i> Avivamento</div>
+            <div class="ref-line"><strong>${a.nome}</strong></div><div>${a.local}</div></div>
+            <div class="card-body"><p><strong>Líder(es):</strong> ${a.lider}</p><p>${a.desc}</p></div></div>
+        `).join('');
+    }
+    function renderHistoriaBrasil() {
+        document.getElementById('brasilGrid').innerHTML = historiaBrasil.map(h => `
+            <div class="card"><div class="card-header"><div class="category-tag"><i class="fas fa-church"></i> Marco histórico</div>
+            <div class="ref-line"><strong>${h.marco}</strong></div></div>
+            <div class="card-body"><p>${h.desc}</p></div></div>
+        `).join('');
+    }
+    function renderPregadores() {
+        document.getElementById('pregadoresGrid').innerHTML = pregadores.map(p => `
+            <div class="card preacher-card"><div class="photo-placeholder"><i class="fas fa-user-circle" style="font-size: 3rem;"></i> ${p.fotoPlaceholder}</div>
+            <div class="card-body"><h3>${p.nome}</h3><div class="ref-line">${p.nasc}</div><div class="bio">${p.bio}</div>
+            <div class="contributions"><strong>Contribuições:</strong> ${p.contrib}</div></div>
+            <div class="card-footer" style="background:#faf3ea; text-align:center;">Pregador geracional</div></div>
+        `).join('');
+    }
+    function renderParabolas() {
+        const colorMap = { simples:"#6b8c5c", faceis:"#4a7c59", intermediarias:"#e6a157", desafiadoras:"#c96f3e", profundas:"#8b3c2c" };
+        for(let [grupo, lista] of Object.entries(parabolas)) {
+            const container = document.getElementById(`grid${grupo.charAt(0).toUpperCase()+grupo.slice(1)}`);
+            if(container) container.innerHTML = lista.map(p => `
+                <div class="card parable-card"><div class="card-header">
+                    <div class="difficulty-badge" style="background:${colorMap[grupo]}; display:inline-block; padding:3px 10px; color:white;">${grupo.toUpperCase()}</div>
+                    <div class="ref-line"><strong>${p.titulo}</strong> — ${p.ref}</div>
+                    <div class="prophecy-text">📖 ${p.narrativa}</div></div>
+                <div class="card-body"><div class="explanation"><i class="fas fa-lightbulb"></i> <strong>Significado:</strong> ${p.significado}</div></div></div>
+            `).join('');
+        }
+    }
+    function setupTabs() {
+        const tabs = document.querySelectorAll('.tab-btn');
+        const contents = ['messiaticas','evidencias','jesus','igreja','pregadores','parabolas'];
+        tabs.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const tabId = btn.getAttribute('data-tab');
+                tabs.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                contents.forEach(c => document.getElementById(`${c}Tab`).classList.remove('active-tab'));
+                document.getElementById(`${tabId}Tab`).classList.add('active-tab');
+            });
+        });
+    }
+    function setupSubTabs() {
+        const subGroups = ['simples','faceis','intermediarias','desafiadoras','profundas'];
+        const subBtns = document.querySelectorAll('#parabolasTab .sub-tab-btn');
+        subBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const subId = btn.getAttribute('data-sub');
+                subBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                subGroups.forEach(g => document.getElementById(`sub${g.charAt(0).toUpperCase()+g.slice(1)}`).classList.remove('active-sub'));
+                document.getElementById(`sub${subId.charAt(0).toUpperCase()+subId.slice(1)}`).classList.add('active-sub');
+            });
+        });
+        const igrejaSubs = document.querySelectorAll('#igrejaTab .sub-tab-btn');
+        const igrejaConts = ['teologia','avivamentos','brasil'];
+        igrejaSubs.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const subId = btn.getAttribute('data-sub');
+                igrejaSubs.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                igrejaConts.forEach(c => document.getElementById(`sub${c.charAt(0).toUpperCase()+c.slice(1)}`).classList.remove('active-sub'));
+                document.getElementById(`sub${subId.charAt(0).toUpperCase()+subId.slice(1)}`).classList.add('active-sub');
+            });
+        });
+    }
+    function setupFilters() {
+        document.querySelectorAll('#filterMessiaticasBar .filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('#filterMessiaticasBar .filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                renderMessiaticas(btn.getAttribute('data-filter'));
+            });
+        });
+        document.querySelectorAll('#filterJesusBar .filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('#filterJesusBar .filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                renderJesusProfecias(btn.getAttribute('data-filter'));
+            });
+        });
+    }
+
+    renderMessiaticas('all');
+    renderEvidencias();
+    renderJesusProfecias('all');
+    renderAvivamentos();
+    renderHistoriaBrasil();
+    renderPregadores();
+    renderParabolas();
+    setupTabs();
+    setupSubTabs();
+    setupFilters();
+</script>
+</body>
+</html>
